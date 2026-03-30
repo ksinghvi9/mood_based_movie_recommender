@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Based Movie Recommender</title>
+    <link rel="stylesheet" href ="CSS/home.css">
+</head>
+
+<body>
+    <header>
+        <h1> Mood Based Movie Recommender </h1>
+    </header>
+    <main>
+        <button id="drama">🙂 Drama</button>
+        <button id="comedy">🎭 Comedy</button>
+        <button id="romance">💖 Romance</button>
+        <button id="horror">👻 Horror</button>
+        <button id="action">💥 Action</button>
+        <button id="scifi"> 🚀 Sci-Fi</button>
+        <button id="thriller"> 🎢 Thriller</button>
+    </main>
+    <div id="search-bar">
+        <input type="text" id="search-input" placeholder="Search for a movie...">
+        <button id="search-button">Search</button>
+    </div>
+    <div id="controls">
+        <select id="filter">
+            <option value="">Filter by Rating</option>
+            <option value="7">Above 7</option>
+            <option value="8">Above 8</option>
+        </select>
+
+        <select id="sort">
+            <option value="">Sort By</option>
+            <option value="az">A-Z</option>
+            <option value="rating">Rating</option>
+        </select>
+    </div>
+    <div id="movieContainer"></div>
+</body>
+
+</html>
