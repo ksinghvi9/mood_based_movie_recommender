@@ -8,7 +8,7 @@ let mood_genre = {
 };
 
 function fetchMovies(genreId) {
-    let apiKey = "YOUR_API_KEY";
+    let apiKey = "4789ae87d318d381c5db330ca1effe53" ;
 
     let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}`;
 
