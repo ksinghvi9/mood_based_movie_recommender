@@ -1,3 +1,4 @@
+
 let mood_genre = {
     happy: 35,            // Comedy
     sad: 18,              // Drama
@@ -85,3 +86,43 @@ relaxedBtn.addEventListener("click", function () {
 confusedBtn.addEventListener("click", function () {
     fetchMovies(mood_genre.confused);
 });
+
+
+let searchInput = document.getElementById("search-input");
+let searchBtn = document.getElementById("search-button");
+
+function searchMovies(query) {
+    let apiKey = "4789ae87d318d381c5db330ca1effe53";
+
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
+
+    let container = document.getElementById("movieContainer");
+    container.innerHTML = "Loading...";
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            displayMovies(data.results);
+        })
+        .catch(error => {
+            console.log("Error:", error);
+        });
+}
+
+searchBtn.addEventListener("click", function () {
+    let query = searchInput.value;
+
+    searchMovies(query);
+});
+
+searchBtn.addEventListener("click", function () {
+    let query = searchInput.value;
+
+    if (query === "") {
+        alert("Please enter a movie name");
+        return;
+    }
+
+    searchMovies(query);
+});
+
