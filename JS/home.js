@@ -1,4 +1,4 @@
-
+let allMovies = [];
 let mood_genre = {
     happy: 35,            // Comedy
     sad: 18,              // Drama
@@ -9,7 +9,7 @@ let mood_genre = {
 };
 
 function fetchMovies(genreId) {
-    let apiKey = "4789ae87d318d381c5db330ca1effe53" ;
+    let apiKey = "4789ae87d318d381c5db330ca1effe53";
 
     let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}`;
 
@@ -19,7 +19,10 @@ function fetchMovies(genreId) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            displayMovies(data.results);
+            console.log("DATA:", data);
+            allMovies = data.results;    
+            console.log("ALL MOVIES:", allMovies);
+            displayMovies(allMovies);    
         })
         .catch(error => {
             console.log("Error:", error);
@@ -112,17 +115,27 @@ function searchMovies(query) {
 searchBtn.addEventListener("click", function () {
     let query = searchInput.value;
 
-    searchMovies(query);
-});
-
-searchBtn.addEventListener("click", function () {
-    let query = searchInput.value;
-
     if (query === "") {
         alert("Please enter a movie name");
         return;
     }
 
     searchMovies(query);
+});
+let filterSelect = document.getElementById("filter");
+
+filterSelect.addEventListener("change", function () {
+    let value = Number(filterSelect.value);
+
+    console.log("Filter value:", value);
+    console.log("All movies before filter:", allMovies);
+
+    let filteredMovies = allMovies.filter(function (movie) {
+        return movie.vote_average >= value;
+    });
+
+    console.log("Filtered movies:", filteredMovies);
+
+    displayMovies(filteredMovies);
 });
 
