@@ -19,10 +19,8 @@ function fetchMovies(genreId) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log("DATA:", data);
-            allMovies = data.results;    
-            console.log("ALL MOVIES:", allMovies);
-            displayMovies(allMovies);    
+            allMovies = data.results;
+            displayMovies(allMovies);
         })
         .catch(error => {
             console.log("Error:", error);
@@ -126,16 +124,30 @@ let filterSelect = document.getElementById("filter");
 
 filterSelect.addEventListener("change", function () {
     let value = Number(filterSelect.value);
-
-    console.log("Filter value:", value);
-    console.log("All movies before filter:", allMovies);
-
+    
     let filteredMovies = allMovies.filter(function (movie) {
         return movie.vote_average >= value;
     });
-
-    console.log("Filtered movies:", filteredMovies);
-
     displayMovies(filteredMovies);
 });
 
+let sortSelect = document.getElementById("sort");
+sortSelect.addEventListener("change", function () {
+    let value = sortSelect.value;
+
+    let sortedMovies = [...allMovies];  
+
+    if (value === "az") {
+        sortedMovies.sort(function (a, b) {
+            return a.title.localeCompare(b.title);
+        });
+    }
+
+    if (value === "rating") {
+        sortedMovies.sort(function (a, b) {
+            return b.vote_average - a.vote_average;
+        });
+    }
+
+    displayMovies(sortedMovies);
+});
